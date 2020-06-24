@@ -34,7 +34,25 @@ class Solution {
         int min = Integer.MAX_VALUE;
         for(int k=i;k<j;k++)
         {
-            int temp = 1+solve(s,i,k) + solve(s,k+1,j);
+            int left =0;
+            int right = 0;
+            if(dp[i][k]!=-1)
+            {
+                left = dp[i][k];
+            }
+            else{
+                left = solve(s,i,k);
+                dp[i][k] = left;
+            }
+            if(dp[k+1][j]!=-1)
+            {
+                right = dp[k+1][j];
+            }
+            else{
+                right = solve(s,k+1,j);
+                dp[k+1][j] = right;
+            }
+            int temp = 1+left + right ;
             if(temp<min)
             {
                 min = temp;
@@ -58,5 +76,3 @@ class Solution {
         return false;
     }
 }
-
-//one last test case doesnot pass with this
